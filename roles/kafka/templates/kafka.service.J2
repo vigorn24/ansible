@@ -1,0 +1,23 @@
+[Unit]
+Description=Kafka
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=kafka
+Group=kafka
+Type=simple
+LimitNOFILE=65536
+LimitNPROC=65536
+LimitMEMLOCK=infinity
+Restart=on-failure
+RestartSec=5s
+
+ExecStart=/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/kraft/server.properties
+
+Environment="KAFKA_HEAP_OPTS=-Xmx4G -Xms4G -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/opt/kafka/data -XX:+CrashOnOutOfMemoryError"
+
+ExecStop=/opt/kafka/bin/kafka-server-stop.sh
+
+[Install]
+WantedBy=multi-user.target

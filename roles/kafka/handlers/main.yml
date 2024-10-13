@@ -1,0 +1,12 @@
+---
+- name: Start and enable service
+  systemd:
+    state: started
+    daemon_reload: yes
+    name: kafka
+    enabled: yes
+
+- name: Restart service
+  ansible.builtin.systemd:
+    state: restarted
+    name: kafka

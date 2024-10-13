@@ -1,0 +1,38 @@
+- name: Check for installation in {{ distrib_install_dir }}
+  ansible.builtin.stat:
+    path: '{{ distrib_install_dir }}'
+  changed_when: false
+  register: distrib_binary
+
+- name: Downloading and installing kafka
+  when: not distrib_binary.stat.exists
+  block:
+    - name: Downloading {{ distrib_tgz_url }}
+      ansible.builtin.get_url:
+        url: '{{ distrib_tgz_url}}'
+        dest: '/tmp/{{ distrib_tgz }}'
+        validate_certs: false
+        mode: '644'
+    - name: Unarchive {{ distrib_tgz }}
+      ansible.builtin.unarchive:
+        remote_src: true
+        src: '/tmp/{{ distrib_tgz}}'
+        dest: '{{ distrib_install_parent_dir }}'
+        creates: '{{ distrib_install_dir }}'
+  always:
+    - name: Rm {{ distrib_gz }}
+      ansible.builtin.file:
+        path: '/tmp/{{ distrib_tgz }}'
+        state: absent
+
+- name: Linking {{ distrib_install_link_dir }} to {{ distrib_install_dir }}
+  ansible.builtin.file:
+    src: '{{ distrib_install_dir }}'
+    dest: '{{ distrib_install_link_dir }}'
+    state: link
+
+- name: Include scripts in the default path
+  ansible.builtin.template:
+    src: 'java.sh.j2'
+    dest: '/etc/profile.d/java.sh'
+    mode: '644'

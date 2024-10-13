@@ -1,0 +1,7 @@
+
+distrib_name: jdk-17_linux-x64_bin
+distrib_tgz: '{{ distrib_name }}.tar.gz'
+distrib_tgz_url: https://download.oracle.com/java/17/latest//{{ distrib_tgz }}
+distrib_install_parent_dir: '/opt'
+distrib_install_dir: '{{ kafka_install_parent_dir }}/{{ distrib_name }}'
+distrib_install_link_dir: '{{ kafka_install_parent_dir }}/java'
