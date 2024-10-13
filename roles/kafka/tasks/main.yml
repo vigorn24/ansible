@@ -43,8 +43,8 @@
   ansible.builtin.file:
     src: '{{ kafka_install_dir }}'
     dest: '{{ kafka_install_link_dir }}'
-    owner: { { kafka_user } }
-    group: { { kafka_group } }
+    owner: {{ kafka_user }}
+    group: {{ kafka_group }}
     state: link
 
 - name: Include kafka scripts in the default path
