@@ -29,8 +29,8 @@
         remote_src: true
         src: '/tmp/{{ kafka_tgz }}'
         dest: '{{ kafka_install_parent_dir }}'
-        owner: {{ kafka_user }}
-        group: {{ kafka_group }}
+        owner: '{{ kafka_user }}'
+        group: '{{ kafka_group }}'
         creates: '{{ kafka_install_dir }}'
   always:
     - name: Rm {{ kafka_tgz }}
