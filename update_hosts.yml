@@ -1,0 +1,14 @@
+---
+- name: Update /etc/hosts file with specific lines
+  hosts: "{{ var_hosts }}"
+  become: yes
+  tasks:
+    - name: Ensure specific lines are present in /etc/hosts
+      blockinfile:
+        path: /etc/hosts
+        block: |
+          192.168.1.11    s101
+          192.168.1.12    s102
+          192.168.1.13    s103
+          192.168.1.14    s104
+        marker: "# {mark} HOST ANSIBLE MANAGED BLOCK"

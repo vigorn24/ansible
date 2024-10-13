@@ -1,0 +1,23 @@
+home:
+  vars:
+    ansible_ssh_user: ansible
+    ansible_ssh_private_key_file: ~/.ssh/id_ansible
+  children:
+    bastion:
+      hosts:
+        s101:
+          ansible_host: 192.168.1.11
+    servers:
+      vars:
+        kafka_cluster_uuid: "c848b0c9-ce64-4c59-bc14-824e0554e36a"
+        kafka_controller_quorum_voters: "1@s102:9093,2@s103:9093,3@s104:9093"
+      hosts:
+        s102:
+          ansible_host: 192.168.1.12
+          kafka_node_id: 1
+        s103:
+          ansible_host: 192.168.1.13
+          kafka_node_id: 2
+        s104:
+          ansible_host: 192.168.1.14
+          kafka_node_id: 3

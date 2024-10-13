@@ -1,0 +1,6 @@
+- name: Install node-exporter
+  hosts: "{{ var_host }}"
+  become: true
+
+  roles:
+    - kafka
