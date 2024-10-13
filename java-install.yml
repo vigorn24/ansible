@@ -1,6 +1,6 @@
-- name: Install kafka
+- name: Install java
   hosts: "{{ var_hosts }}"
   become: true
 
   roles:
-    - kafka
+    - java
