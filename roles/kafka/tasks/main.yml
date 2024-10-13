@@ -29,6 +29,8 @@
         remote_src: true
         src: '/tmp/{{ kafka_tgz }}'
         dest: '{{ kafka_install_parent_dir }}'
+        owner: {{ kafka_user }}
+        group: {{ kafka_group }}
         creates: '{{ kafka_install_dir }}'
   always:
     - name: Rm {{ kafka_tgz }}
@@ -41,6 +43,8 @@
   ansible.builtin.file:
     src: '{{ kafka_install_dir }}'
     dest: '{{ kafka_install_link_dir }}'
+    owner: { { kafka_user } }
+    group: { { kafka_group } }
     state: link
 
 - name: Include kafka scripts in the default path
