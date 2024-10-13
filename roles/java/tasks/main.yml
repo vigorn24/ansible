@@ -36,3 +36,6 @@
     src: 'java.sh.j2'
     dest: '/etc/profile.d/java.sh'
     mode: '644'
+
+- name: install alternatives
+  ansible.builtin.command: alternatives --install /usr/bin/java java  {{ distrib_install_dir }}/bin/java 1000
