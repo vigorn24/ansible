@@ -38,4 +38,4 @@
     mode: '644'
 
 - name: install alternatives
-  ansible.builtin.command: alternatives --install /usr/bin/java java  {{ distrib_install_dir }}/bin/java 1000
+  ansible.builtin.command: update-alternatives --install /usr/bin/java java  {{ distrib_install_dir }}/bin/java 1000
