@@ -1,0 +1,12 @@
+---
+# file: roles/kafka/tasks/config.yml
+
+- name: Copy kafka config
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/files/kafka/{{ zone }}/{{ inventory_hostname }}/server.properties"
+    dest: "{{ kafka_install_dir }}/config/kraft/server.properties"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: "0644"
+  notify:
+    - Restart service
