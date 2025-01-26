@@ -10,18 +10,28 @@ Role Name
 
 Пример записи в инвентори
 ```yaml
-    elk-kafka:
+    kafka:
       vars:
         kafka_cluster_uuid: "c848b0c9-ce64-4c59-bc14-824e0554e36a"
-        kafka_controller_quorum_voters: "1@ft-kafka-d02p:9093,2@ft-kafka-d04p:9093,3@ft-kafka-d05p:9093"
+        kafka_controller_quorum_voters: "1@192.168.1.12:9093,2@192.168.1.13:9093,3@192.168.1.14:9093"
       hosts:
-        ft-kafka-d02p:
-          ansible_host: 11.211.240.31
+        s102:
+          ansible_host: 192.168.1.12
           kafka_node_id: 1
-        ft-kafka-d04p:
-          ansible_host: 11.211.240.32
+        s103:
+          ansible_host: 192.168.1.13
           kafka_node_id: 2
-        ft-kafka-d05p:
-          ansible_host: 11.211.240.33
+        s104:
+          ansible_host: 192.168.1.14
           kafka_node_id: 3
 ```
+
+
+- установка (playbook разворачивает с типовым файлом конфигурации, если требуются специфические настройки готовим файлы конфигурации и выполняем kafka-config.yaml)
+> ansible-playbook -i ./inventories/<zone>.yml  kafka-install.yaml  --extra-vars "var_host=<hosts>"
+после установки рекомендуется сохнанить файлы конфигурации в репе для возможности их последующего обновления
+"{{ playbook_dir }}/files/kafka/{{ zone }}/{{ inventory_hostname }}/server.properties"
+
+- обновление файла конфигурации 
+предварительно проверить наличие файлов конфигураций в "{{ playbook_dir }}/files/kafka/{{ zone }}/{{ inventory_hostname }}/server.properties"
+> ansible-playbook -i ./inventories/<zone>.yml  kafka-config.yaml  --extra-vars "var_host=<hosts>"
