@@ -1,10 +1,12 @@
 ---
 kafka_user: kafka
 kafka_group: kafka
-kafka: kafka_2.13-3.8.0
+kafka: kafka_2.13-3.9.0
 kafka_tgz: '{{ kafka }}.tgz'
-kafka_tgz_url: https://artifactory.mts.ru/artifactory/ansible-mtsdengi-generic-local/{{ kafka_tgz }}
+kafka_tgz_url: https://dlcdn.apache.org/kafka/3.9.0/{{ kafka_tgz }}
 kafka_install_parent_dir: '/opt'
 kafka_install_dir: '{{ kafka_install_parent_dir }}/{{ kafka }}'
 kafka_install_link_dir: '{{ kafka_install_parent_dir }}/kafka'
 kafka_cluster_uuid: TIHIMEwgQ1CdhK-hJYcDLQ
+
+
