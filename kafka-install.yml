@@ -3,4 +3,5 @@
   become: true
 
   roles:
-    - kafka
+    - role: kafka
+      action: "install"
