@@ -40,14 +40,23 @@ controller.quorum.voters={{ kafka_controller_quorum_voters }}
 #     listeners = listener_name://host_name:port
 #   EXAMPLE:
 #     listeners = PLAINTEXT://your.host.name:9092
-listeners=PLAINTEXT://:9092,CONTROLLER://:9093
+listeners=PLAINTEXT://:9092,SSL://:9093,CONTROLLER://:9094
+
+{% if kafka_enable_ssl %}
+ssl.keystore.location=/opt/kafka/keys/kafka.server.keystore.jks
+ssl.keystore.password=12345678
+ssl.key.password=12345678
+ssl.truststore.location=/opt/kafka/keys/kafka.server.truststore.jks
+ssl.truststore.password=12345678
+ssl.endpoint.identification.algorithm=
+{% endif %}
 
 # Name of listener used for communication between brokers.
 inter.broker.listener.name=PLAINTEXT
 
 # Listener name, hostname and port the broker will advertise to clients.
 # If not set, it uses the value for "listeners".
-advertised.listeners=PLAINTEXT://{{ ansible_hostname }}:9092
+advertised.listeners=PLAINTEXT://{{ ansible_hostname }}:9092,SSL://{{ ansible_hostname }}:9093
 
 # A comma-separated list of the names of the listeners used by the controller.
 # If no explicit mapping set in `listener.security.protocol.map`, default will be using PLAINTEXT protocol
