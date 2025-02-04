@@ -10,7 +10,7 @@ home:
     servers:
       vars:
         kafka_cluster_uuid: "c848b0c9-ce64-4c59-bc14-824e0554e36a"
-        kafka_controller_quorum_voters: "1@s102:9093,2@s103:9093,3@s104:9093"
+        kafka_controller_quorum_voters: "1@s102:9094,2@s103:9094,3@s104:9094"
         kafka_enable_ssl: true
       hosts:
         s102:
