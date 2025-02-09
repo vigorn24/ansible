@@ -32,6 +32,8 @@ Role Name
 после установки рекомендуется сохнанить файлы конфигурации в репе для возможности их последующего обновления
 "{{ playbook_dir }}/files/kafka/{{ zone }}/{{ inventory_hostname }}/server.properties"
 
+> ansible-playbook -i ./inventories/home.yml  kafka-connect.yml --extra-vars "var_hosts=s102"
+
 - обновление файла конфигурации 
 предварительно проверить наличие файлов конфигураций в "{{ playbook_dir }}/files/kafka/{{ zone }}/{{ inventory_hostname }}/server.properties"
 > ansible-playbook -i ./inventories/<zone>.yml  kafka-config.yaml  --extra-vars "var_host=<hosts>"

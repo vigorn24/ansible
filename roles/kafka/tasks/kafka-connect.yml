@@ -5,8 +5,8 @@
   ansible.builtin.copy:
     src: "connect-distributed.properties.j2"
     dest: "{{ kafka_install_dir }}/config/connect-distributed.properties"
-    owner: "{{ user }}"
-    group: "{{ group }}"
+    owner: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
     mode: "0644"
 
 - name: Create Kafka service
