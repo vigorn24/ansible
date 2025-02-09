@@ -94,7 +94,7 @@
   ansible.builtin.systemd:
     daemon_reload: true
 
-- name: Start WebLogic Node Manager
+- name: Start kafka service
   ansible.builtin.service:
     name: "kafka.service"
     enabled: true

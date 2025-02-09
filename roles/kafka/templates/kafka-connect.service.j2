@@ -1,0 +1,19 @@
+[Unit]
+Description=Kafka
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=kafka
+Group=kafka
+Type=simple
+LimitNOFILE=65536
+LimitNPROC=65536
+LimitMEMLOCK=infinity
+Restart=on-failure
+RestartSec=5s
+
+ExecStart=/opt/kafka/bin/connect-distributed.sh /opt/kafka/config/connect-distributed.properties
+
+[Install]
+WantedBy=multi-user.target

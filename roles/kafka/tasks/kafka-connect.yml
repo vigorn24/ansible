@@ -1,0 +1,28 @@
+---
+# file: roles/kafka/tasks/kafka-connect.yml
+
+- name: Copy kafka config
+  ansible.builtin.copy:
+    src: "connect-distributed.properties.j2"
+    dest: "{{ kafka_install_dir }}/config/connect-distributed.properties"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: "0644"
+
+- name: Create Kafka service
+  ansible.builtin.template:
+    src: "kafka-connect.service.j2"
+    dest: "/etc/systemd/system/kafka-connect.service"
+    mode: "644"
+
+- name: Systemd daemon-reload
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Start kafka service
+  ansible.builtin.service:
+    name: "kafka-connect.service"
+    enabled: true
+    state: "started"
+
+

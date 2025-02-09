@@ -1,0 +1,7 @@
+- name: Install kafka
+  hosts: "{{ var_hosts }}"
+  become: true
+
+  roles:
+    - role: kafka
+      action: "kafka-connect"

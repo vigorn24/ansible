@@ -10,3 +10,9 @@
   ansible.builtin.include_tasks: "config.yml"
   when:
     - action == 'config'
+
+
+- name: Install kafka connect
+  ansible.builtin.include_tasks: "kafka-connect.yml"
+  when:
+    - action == 'kafka-connect'
