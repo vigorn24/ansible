@@ -2,7 +2,7 @@
 # file: roles/kafka/tasks/kafka-connect.yml
 
 - name: Copy kafka config
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: "connect-distributed.properties.j2"
     dest: "{{ kafka_install_dir }}/config/connect-distributed.properties"
     owner: "{{ kafka_user }}"
